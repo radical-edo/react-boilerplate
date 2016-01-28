@@ -54,17 +54,7 @@
       "babelify"
     ]
   },
-  "overrides": {
-    "bootstrap": {
-      "main": "dist/css/bootstrap.css"
-    },
-    "font-awesome": {
-      "main": "css/font-awesome.css"
-    }
-  },
   "dependencies": {
-    "bootstrap": "^3.3.5",
-    "font-awesome": "^4.4.0",
     "lodash": "^4.0.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
