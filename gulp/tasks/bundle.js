@@ -53,6 +53,8 @@ function buildStyles() {
 }
 
 function buildVendorStyles() {
+  // Might be removing this
+  // I'll leave it for now though
   return gulp.src(bowerFiles(_.merge({
     filter: /.+\.css$/
   }, config.bowerFiles)))
@@ -63,7 +65,6 @@ function buildVendorStyles() {
 
 module.exports = function bundle() {
   return gulp.src(config.paths.index)
-    .pipe(inject(buildVendorStyles(), _.merge({ name: 'vendor' }, config.inject)))
     .pipe(inject(buildStyles(), config.inject))
     .pipe(inject(buildApp(), config.inject))
     .pipe(gulp.dest(config.paths.dest));
