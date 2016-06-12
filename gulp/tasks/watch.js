@@ -1,9 +1,8 @@
 'use strict';
-
-var gulp = require('gulp');
-var watch = require('gulp-watch');
-var config = require('../config');
-var _ = require('lodash');
+const gulp = require('gulp');
+const watch = require('gulp-watch');
+const config = require('../config');
+const _ = require('lodash');
 
 function run(task) {
   return function () {

@@ -1,6 +1,7 @@
-var dest = 'public';
+'use strict';
+const dest = 'public';
 
-var config = {
+const config = {
   env: {},
   inject: {
     ignorePath: dest,

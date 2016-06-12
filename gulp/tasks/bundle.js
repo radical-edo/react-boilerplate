@@ -1,26 +1,22 @@
 'use strict';
+const gulp = require('gulp');
+const inject = require('gulp-inject');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const watchify = require('watchify');
+const concat = require('gulp-concat');
+const _ = require('lodash');
+const buffer = require('vinyl-buffer');
+const uglify = require('gulp-uglify');
+const util = require('gulp-util');
 
-var gulp = require('gulp');
-var inject = require('gulp-inject');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var watchify = require('watchify');
-var bowerFiles = require('main-bower-files');
-var sass = require('gulp-sass');
-var concat = require('gulp-concat');
-var _ = require('lodash');
-var buffer = require('vinyl-buffer');
-var uglify = require('gulp-uglify');
-var minifyCss = require('gulp-minify-css');
-var util = require('gulp-util');
+const onError = require('../utils/on_error');
+const config = require('../config');
 
-var onError = require('../utils/on_error');
-var config = require('../config');
-
-var bundler;
+let bundler;
 
 function initBundler() {
-  var b = browserify({
+  let b = browserify({
     entries: config.paths.jsx,
     extensions: ['.jsx'],
     debug: true,
@@ -45,27 +41,8 @@ function buildApp () {
     .pipe(gulp.dest(config.paths.dest));
 }
 
-function buildStyles() {
-  return gulp.src(config.paths.scss)
-    .pipe(sass().on('error', sass.logError))
-    .pipe(config.env.production && minifyCss() || util.noop())
-    .pipe(gulp.dest(config.paths.dest));
-}
-
-function buildVendorStyles() {
-  // Might be removing this
-  // I'll leave it for now though
-  return gulp.src(bowerFiles(_.merge({
-    filter: /.+\.css$/
-  }, config.bowerFiles)))
-    .pipe(concat('vendor.css'))
-    .pipe(config.env.production && minifyCss() || util.noop())
-    .pipe(gulp.dest(config.paths.dest));
-}
-
 module.exports = function bundle() {
   return gulp.src(config.paths.index)
-    .pipe(inject(buildStyles(), config.inject))
     .pipe(inject(buildApp(), config.inject))
     .pipe(gulp.dest(config.paths.dest));
 };
