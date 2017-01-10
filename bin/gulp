@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-
-task=$1
-
-if [ -z $task ]; then
-  task="watch"
-fi
-
-NODE_ENV=development ./node_modules/.bin/gulp $task
