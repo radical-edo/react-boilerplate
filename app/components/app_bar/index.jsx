@@ -61,7 +61,6 @@ export const AppBar = WithAppBarHeightHOC(
     }
 
     __countdown(expires_at, sessionTimeout) {
-      console.log(sessionTimeout.asMilliseconds());
       if (sessionTimeout.asMilliseconds() <= 0) {
         clearTimeout(this.__timer);
         this.props.onSessionExpired();
