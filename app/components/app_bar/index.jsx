@@ -61,7 +61,6 @@ export const AppBar = WithAppBarHeightHOC(
     }
 
     __countdown(expires_at, sessionTimeout) {
-      console.log(expires_at);
       console.log(sessionTimeout.asMilliseconds());
       if (sessionTimeout.asMilliseconds() <= 0) {
         clearTimeout(this.__timer);
@@ -69,7 +68,6 @@ export const AppBar = WithAppBarHeightHOC(
       } else {
         this.setState({ sessionTimeout: `${sessionTimeout.minutes()}:${sessionTimeout.seconds()}` });
         return setTimeout(() => {
-          console.log(moment.duration(moment(expires_at).diff(moment())));
           this.__timer = this.__countdown(expires_at, moment.duration(moment(expires_at).diff(moment())));
         }, 1e3);
       }
